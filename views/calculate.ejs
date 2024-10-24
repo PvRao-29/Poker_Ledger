@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Ledger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a5c2c;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cpath fill='%23ffffff' fill-opacity='0.05' d='M0 17.83V0h17.83a3 3 0 0 1-5.66 2H5.9A5 5 0 0 1 2 5.9v6.27a3 3 0 0 1-2 5.66zm0 18.34a3 3 0 0 1 2 5.66v6.27A5 5 0 0 1 5.9 52h6.27a3 3 0 0 1 5.66 0H0V36.17zM36.17 52H52V36.17a3 3 0 0 1-2-5.66v-6.27A5 5 0 0 1 46.1 20h-6.27a3 3 0 0 1-5.66-2V52zm18.34-2a3 3 0 0 1-5.66-2h-6.27a5 5 0 0 1-3.9 3.9v6.27a3 3 0 0 1 0 5.66V52h17.83z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #35654d;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2e7d32; /* Poker green */
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #2e7d32; /* Poker green */
+            color: white;
+            font-weight: bold;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        ul li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #e0f2e9;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        ul li:hover {
+            background-color: #c8e6c9;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        input[type="submit"], a {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #2e7d32;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover, a:hover {
+            background-color: #1b5e20;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .actions a {
+            margin: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            input[type="submit"], a {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Payment Ledger</h1>
+
+    <h2>Player Balances:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Player Name</th>
+            <th>Bought In ($)</th>
+            <th>Cashed Out ($)</th>
+            <th>Net Profit/Loss ($)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if (table_data && table_data.length > 0) { %>
+            <% table_data.forEach(function(row) { %>
+                <tr>
+                    <td><%= row.name %></td>
+                    <td><%= row.bought_in %></td>
+                    <td><%= row.cashed_out %></td>
+                    <td><%= row.net_profit_loss %></td>
+                </tr>
+            <% }); %>
+        <% } else { %>
+            <tr>
+                <td colspan="4">No players available.</td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+    <h2>Transactions (Who Owes Whom):</h2>
+    <ul>
+        <% if (ledger && ledger.length > 0) { %>
+            <% ledger.forEach(function(transaction) { %>
+                <li><%= transaction.from %> owes <%= transaction.to %> $<%= formatCurrency(transaction.amount) %></li>
+            <% }); %>
+        <% } else { %>
+            <li>No transactions available.</li>
+        <% } %>
+    </ul>    
+
+    <form method="post" action="/reset">
+        <input type="submit" value="Reset Players and Ledger">
+    </form>
+
+    <div class="actions">
+        <a href="/">Back to Entry</a>
+        <a href="/leaderboard">View Leaderboard</a>
+    </div>
+</div>
+
+</body>
+</html>

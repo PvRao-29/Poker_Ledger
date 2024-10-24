@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                           // Specify ECMAScript target version
+    "module": "CommonJS",                      // Use CommonJS for compatibility with Node.js
+    "rootDir": "./in",                        // Root directory of TypeScript files                       
+    "outDir": "./out",                                                // Output directory for compiled JavaScript
+    "esModuleInterop": true,                   // Allow default imports from modules with no default export
+    "strict": true,                            // Enable strict type checking
+    "moduleResolution": "node",                // Resolve modules using Node.js style
+    "skipLibCheck": true,                      // Skip type checking for all declaration files
+    "forceConsistentCasingInFileNames": true   // Disallow inconsistencies in file name casing
+  },
+  "include": ["in/**/*", "StressTest.js"],                     // Include all TypeScript files in the src directory
+  "exclude": ["node_modules", "out"]          // Exclude node_modules and the dist folder
+}
