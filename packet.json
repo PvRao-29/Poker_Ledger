@@ -1,0 +1,17 @@
+{
+    "name": "Poker_Ledger",
+    "version": "1.0.0",
+    "description": "Poker Ledger Application",
+    "scripts": {
+      "start": "node out/game.js",
+      "build": "tsc"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "ejs": "^3.1.6"
+    },
+    "devDependencies": {
+      "typescript": "^4.3.5"
+    }
+  }
+  
