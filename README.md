@@ -84,3 +84,6 @@ Once the application is running:
 
 ```bash
 npm install --save-dev @types/express @types/node
+```
+
+If you've reached this far, thank you for reading :)
